@@ -1,0 +1,13 @@
+# Fixed Path Variables
+path: /home/cedric/Documents/HiWi/working/demultiplexed/
+ONTrun: ONTrun_054
+pathRef: /home/cedric/Documents/HiWi/working/ONTrun_54
+sampleNumber: 5
+
+# Dynamically allocated paths using the above 
+pathFastq: "" 
+pathBarcode: /demultiplexed
+pathCanu: 00_analysis/canu
+pathMinimap2: 00_analysis/minimap2
+pathNgmlr: 00_analysis/ngmlr
+
