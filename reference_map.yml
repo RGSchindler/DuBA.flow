@@ -1,6 +1,0 @@
-references:
-    ref001: SEN2_PRO_L0.fasta
-    ref002: SEN2_ORF_ATG-STOP_L0.fasta
-    ref003: SEN2_ORF_ATG-noSTOP_L0.fasta
-    ref004: SEN2_ORF_noATG-STOP_L0.fasta
-    ref005: SEN2_ORF_noATG-noSTOP_L0.fasta

@@ -1,0 +1,26 @@
+# Fixed Path Variables
+# path
+path_demultiplexed: "/home/cedric/Documents/HiWi/ONTrun_059/ONTrun_059/demultiplexed/"
+# ONTrun
+run_id: 59
+# pathRef
+path_reference: "/home/cedric/Documents/HiWi/ONTrun_059/ONTrun_059/references"
+# nonDemultiplexed
+path_multiplexed: "/home/cedric/Documents/HiWi/ONTrun_059/ONTrun_059/non-demultiplexed/"
+# barcodeFile
+index_combination: "/home/cedric/Documents/HiWi/ONTrun_059/ONTrun_059/IndexCombination_ONTrun_059.txt"
+# refMap
+reference_map: "/home/cedric/Documents/HiWi/ONTrun_059/ONTrun_059/reference_map.yml"
+# concat_fasta_path
+path_concat_fasta: ""
+
+
+# Dynamically created paths using the above 
+# pathFastq
+path_fastq: ""
+# pathBarcode
+path_barcode: "/demultiplexed"
+# pathMinimap2
+path_minimap: "00_analysis/minimap2"
+
+
