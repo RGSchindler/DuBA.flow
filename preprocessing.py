@@ -48,7 +48,7 @@ class Preprocessing:
         '''
         logger.info("Starting sequence filtering")
         unzip = process.run("gunzip -c input/input.fastq.gz")
-        chopper = process.run("/home/Nanopore/bin/micromamba run -n chopper chopper -q 10 -l 50", stdin=unzip.stdout)
+        chopper = process.run("micromamba run -n chopper chopper -q 10 -l 50", stdin=unzip.stdout)
         process.run("gzip > input/filtered.fastq.gz", stdin=chopper.stdout, chained=False)
         logger.info("Sequence filtering completed")
 
@@ -56,7 +56,7 @@ class Preprocessing:
     def run_demultiplexing(self) -> None:
         '''Primer demultiplexing for sequenced reads'''
         logger.info("Start demultiplexing")
-        process.run("python3.10 minibar.py -T -F input/IndexCombination.tsv input/filtered.fastq.gz -P ''", chained=False)
+        process.run("python3 minibar.py -T -F input/IndexCombination.tsv input/filtered.fastq.gz -P ''", chained=False)
         logger.info("Finished demultiplexing")
 
 

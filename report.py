@@ -45,7 +45,7 @@ class Report:
     
 
     def __post_init__(self) -> None:
-        self.path = f"/home/Nanopore/input/output/{self.sample_id}"
+        self.path = f"/home/dubaflow/input/output/{self.sample_id}"
         self.coverage_file = f"{self.path}/coverage"
         self.output = f"{self.path}/report.html"
         self.reference_file = f"{self.path}/{self.reference}"

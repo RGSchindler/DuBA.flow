@@ -31,7 +31,7 @@ class Sample:
 
 
     def __post_init__(self):
-        self.workdir = f"/home/Nanopore/input/output/{self.sample}"
+        self.workdir = f"/home/dubaflow/input/output/{self.sample}"
         self.reference_path = f"{self.workdir}/{self.reference}"
         self.sample_fastq = f"{self.workdir}/{self.sample}.fastq"
         self.sample_bam = f"{self.workdir}/{self.sample}.bam"
@@ -50,39 +50,27 @@ class Sample:
             self.create_stats()
             self.set_stats()
 
-    '''
-        f"minimap2 -ax map-ont {ref} {barcode} > {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}.sam",
-        f"samtools view -S -b {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}.sam > {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}.bam",
-        f"samtools sort {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}.bam -o {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}_sort.bam",
-        f"samtools index {pathMinimap2}/barcode{idx}/{ONTrun}S{idx}_sort.bam",
-    '''
-
 
     def process(self) -> None:
-        #mapping = process.run(f"/home/Nanopore/bin/micromamba run -n minimap2 minimap2 -ax map-ont {self.reference_path} {self.sample_fastq}")
-        #process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools sort -o {self.sample_bam}", stdin=mapping.stdout, chained=False)
-        #try:
-        #    os.waitpid(os.getpgid(mapping), 0)
-        #except:
-        #    pass
-        process.run(f"/home/Nanopore/bin/micromamba run -n minimap2 minimap2 -ax map-ont {self.reference_path} {self.sample_fastq} -o {self.workdir}/temp.sam", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools view -S -b {self.workdir}/temp.sam -o {self.workdir}/temp.bam", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools sort {self.workdir}/temp.bam -o {self.sample_bam}", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools index {self.sample_bam}", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools consensus -a -A -f pileup --show-ins no --show-del yes {self.sample_bam} -o {self.workdir}/consensus.pileup", chained=False)
+        process.run(f"micromamba run -n minimap2 minimap2 -ax map-ont {self.reference_path} {self.sample_fastq} -o {self.workdir}/temp.sam", chained=False)
+        process.run(f"micromamba run -n samtools samtools view -S -b {self.workdir}/temp.sam -o {self.workdir}/temp.bam", chained=False)
+        process.run(f"micromamba run -n samtools samtools sort {self.workdir}/temp.bam -o {self.sample_bam}", chained=False)
+        process.run(f"micromamba run -n samtools samtools index {self.sample_bam}", chained=False)
+        process.run(f"micromamba run -n samtools samtools consensus -a -A -f pileup --show-ins no --show-del yes {self.sample_bam} -o {self.workdir}/consensus.pileup", chained=False)
         try:
             os.remove(f"{self.workdir}/temp.sam")
             os.remove(f"{self.workdir}/temp.bam")
         except FileNotFoundError:
             pass
+        
 
     def create_stats(self) -> None:
-        stats = process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools stats {self.sample_bam}")
+        stats = process.run(f"micromamba run -n samtools samtools stats {self.sample_bam}")
         grep = process.run("grep ^SN", stdin=stats.stdout)
         process.run(f"cut -f 2- > {self.workdir}/stats.txt", stdin=grep.stdout, chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools idxstats {self.sample_bam} > {self.workdir}/idxstats.txt", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n samtools samtools depth -a {self.sample_bam} > {self.workdir}/coverage", chained=False)
-        process.run(f"/home/Nanopore/bin/micromamba run -n deeptools plotCoverage -b {self.sample_bam} --plotFile coverage_plot --ignoreDuplicates", cwd=self.workdir, chained=False)
+        process.run(f"micromamba run -n samtools samtools idxstats {self.sample_bam} > {self.workdir}/idxstats.txt", chained=False)
+        process.run(f"micromamba run -n samtools samtools depth -a {self.sample_bam} > {self.workdir}/coverage", chained=False)
+        process.run(f"micromamba run -n deeptools plotCoverage -b {self.sample_bam} --plotFile coverage_plot --ignoreDuplicates", cwd=self.workdir, chained=False)
     
 
     def set_stats(self) -> None:
