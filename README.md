@@ -121,6 +121,7 @@ The columns in the general report file are explained as follows:
 Each sample-specific subfolder will contain:
 - `consensus_sequence.fasta`: This file contains the consensus sequencing result.
 - `report.html`: An easy-to-read and interactive HTML report file that provides all essential information.  
+  
 **Additional Files**  
 Besides the primary output files, several secondary files like *.bam*, *.pileup*, *.coverage*, and stats will also be generated in the individual sample report folders.
 
