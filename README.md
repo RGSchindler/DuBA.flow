@@ -5,7 +5,7 @@ A dual barcode amplicon sequencing workflow for efficient and highly parallelize
 ## Description
 ![Duba.flow Pipeline](pipeline.png)
 
-DuBA.flow is an integrated analysis pipeline designed to process and analyze basecalled genomic data. The pipeline streamlines multiple bioinformatics tasks including demultiplexing, reference mapping, quality control, and data visualization. It is made conveniently available as a Docker image, eliminating version incompatibilities and simplifying deployment. 
+DuBA.flow is an integrated analysis pipeline designed to process and analyze basecalled long-read sequencing data. The pipeline streamlines multiple bioinformatics tasks including demultiplexing, reference mapping, quality control, and data visualization. It is made conveniently available as a Docker image, eliminating version incompatibilities and simplifying deployment. 
 
 ### Tested
 Duba.flow was tested using Python version 3.11.2 and Micromamba version 1.4.6.  It employs the subsequent software packages:
